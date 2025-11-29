@@ -86,4 +86,4 @@ If you type anything else (like `.` or `hi`), the bot gently reminds you:
 ---
 
 ## 🏁 Final Notes
-This bot is built for reliability and clarity. It doesn’t rely on fancy UI — just solid backend routing and secure triggers. If you’re judging this for a contest, I hope it reflects thoughtful design, defensive coding, and real-world usability.
+This bot is built for reliability and clarity. It doesn’t rely on fancy UI — just solid backend routing and secure triggers. I hope it reflects thoughtful design, defensive coding, and real-world usability.
