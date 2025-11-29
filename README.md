@@ -1,9 +1,33 @@
 # 🛡️ Project Risk Monitor Bot
 
-## 👋 Introduction
+##  Introduction
 This bot was built to help project teams stay informed and proactive about risks — without needing to dig through dashboards or reports. Whether you're a project owner or a contributor, you can trigger key actions like `CHECK` or `ALERT` directly from Zoho Cliq. It’s lightweight, secure, and designed for real-world usage.
 
 ---
+
+
+## Architecture
+
+![CliqToProject Architecture](https://github.com/mohancoder2k/CliqBackend/blob/main/images/arch.png?raw=true)
+
+This diagram illustrates the end-to-end flow of the CliqToProject bot:
+
+- **Zoho Cliq (User Interaction Layer)**  
+  A user sends a message like `CHECK` or `ALERT` to the bot. The bot uses a Participation Handler to normalize and validate the input. It then routes the message to the backend via an incoming webhook, attaching a secure header (`X-Webhook-Token`) for authentication.
+
+- **Backend (Flask on Render)**  
+  The Flask server receives the webhook payload and decides the action:
+  - If the message is `CHECK`, it triggers a POST to `/webhook/cliq`
+  - If the message is `ALERT`, it triggers a POST to `/digest`  
+  All requests are logged and validated defensively.
+
+- **Zoho Projects (Data Layer)**  
+  The backend interacts with Zoho Projects using its REST API. It fetches task status or sends alerts/digests. OAuth tokens are exchanged and refreshed securely, with scoped access to ensure minimal permissions.
+
+- **Response Flow**  
+  Once the backend receives a response from Zoho Projects, it formats the result and pushes it back to the Zoho Cliq bot, which replies to the user with a confirmation or status update.
+
+This architecture ensures secure, reliable, and real-time communication between Zoho Cliq and Zoho Projects, powered by a lightweight Flask backend hosted on Render.
 
 ## 🚀 Features
 - **CHECK** → Sends a secure POST request to `/webhook/cliq` to fetch or log current project status.
