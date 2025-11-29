@@ -29,8 +29,9 @@ This diagram illustrates the end-to-end flow of the CliqToProject bot:
 
 This architecture ensures secure, reliable, and real-time communication between Zoho Cliq and Zoho Projects, powered by a lightweight Flask backend hosted on Render.
 
-## Documented PDF
-![Click here to get the PDF](https://drive.google.com/file/d/1rUWQzleS3DKUcb5u34LLMSIl5hxTJSAF/view?usp=sharing)
+## 📄 Documented PDF
+
+[📥 Click here to view the full documentation (PDF)](https://drive.google.com/file/d/1rUWQzleS3DKUcb5u34LLMSIl5hxTJSAF/view?usp=sharing)
 
 ## 🚀 Features
 - **CHECK** → Sends a secure POST request to `/webhook/cliq` to fetch or log current project status.
