@@ -1,48 +1,61 @@
-# CliqToProject – Zoho Cliqtrix Contest Submission
+# 🛡️ Project Risk Monitor Bot
 
-## Overview
-CliqToProject is a Zoho Cliq bot integrated with Zoho Projects to provide real-time project monitoring, task status checks, and automated alerts. 
-The bot helps teams stay updated on project activities without manually checking dashboards. 
-This system was developed end-to-end by overcoming challenges across Zoho Projects API integration, Zoho Cliq bot event handling, and Zoho Catalyst AppSail deployment.
+## 👋 Introduction
+This bot was built to help project teams stay informed and proactive about risks — without needing to dig through dashboards or reports. Whether you're a project owner or a contributor, you can trigger key actions like `CHECK` or `ALERT` directly from Zoho Cliq. It’s lightweight, secure, and designed for real-world usage.
 
-## Key Features
-- Command-based bot interaction inside Zoho Cliq.
-- CHECK command triggers real-time task monitoring.
-- ALERT command sends scheduled or immediate digest alerts.
-- Backend built using Python (Flask) and hosted on Zoho Catalyst AppSail.
-- Secure communication using Zoho OAuth and scoped API access.
-- Logs and validations implemented for debugging and consistency.
+---
 
-## Architecture
-1. User sends a message to the Zoho Cliq bot.
-2. Zoho Cliq triggers an incoming webhook.
-3. Flask backend (hosted on Catalyst AppSail) receives the payload.
-4. Backend decides the action based on message text:
-   - If message == "CHECK": POST request to `/webhook/cliq`
-   - If message == "ALERT": POST request to `/digest`
-5. Backend interacts with Zoho Projects API when needed.
-6. Result is pushed back to Zoho Cliq via bot reply.
+## 🚀 Features
+- **CHECK** → Sends a secure POST request to `/webhook/cliq` to fetch or log current project status.
+- **ALERT** → Sends a secure POST to `/digest` to trigger a risk digest or escalation.
+- **Simple UI** → Users can type `CHECK` or `ALERT` directly in chat. No menus required.
+- **Secure by Design** → All backend calls are protected with token-based headers (`X-Webhook-Token`).
 
-## Technology Stack
-- Python (Flask)
-- Zoho Catalyst AppSail
-- Zoho Cliq Bot API
-- Zoho Projects REST API
-- HTTPS Webhooks
+---
 
-## Challenges Overcome
-- Handling Zoho OAuth token refresh and authentication issues.
-- Fixing invalid bot configurations and event routing.
-- Debugging 400/401 errors from Zoho Projects API.
-- Deploying Flask server successfully in Catalyst AppSail.
-- Managing webhook structures and response formatting.
-- Ensuring correct JSON structures for Zoho Cliq bot cards and messages.
+## 💬 Usage
+Type one of the following in the bot chat:
+- `CHECK` → to fetch current status
+- `ALERT` → to trigger a digest or escalation
 
-## Endpoints
-### POST /webhook/cliq
-Receives Zoho Cliq messages and processes bot commands.
+If you type anything else (like `.` or `hi`), the bot gently reminds you:
+> “Send CHECK or ALERT.”
 
-### POST /digest
-Sends alert or digest notifications back to Cliq.
+---
 
-## Folder Structure
+## 🔐 Security
+- All POST requests include a custom header:  
+  `X-Webhook-Token: 5566aabbcc`
+- No sensitive data is exposed in the bot UI.
+- Backend endpoints are hosted securely on Render.
+
+---
+
+## 🧱 Tech Stack
+- **Zoho Cliq Bot** (Deluge scripting)
+- **Flask Backend** (Python)
+- **Render Hosting**
+- **Token-based Auth**
+- **Interactive UI (optional)** via button cards
+
+---
+
+## 🧪 Testing
+1. Type `CHECK` or `ALERT` in the bot chat
+2. Confirm backend logs show POST requests
+3. Try sending `.` or `hello` to see fallback message
+4. Backend should respond with `200 OK` and log the request
+
+---
+
+## 📦 Deployment Notes
+- Backend endpoints are live at:
+  - `https://cliqbackend.onrender.com/webhook/cliq`
+  - `https://cliqbackend.onrender.com/digest`
+- Bot is configured with a Participation Handler for chat input
+- Menu Handler is optional and can be used to show buttons
+
+---
+
+## 🏁 Final Notes
+This bot is built for reliability and clarity. It doesn’t rely on fancy UI — just solid backend routing and secure triggers. If you’re judging this for a contest, I hope it reflects thoughtful design, defensive coding, and real-world usability.
